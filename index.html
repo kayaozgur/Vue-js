@@ -20,7 +20,7 @@
         </form>
 
         <div v-if= "liste.length > 0">
-            <h3>Alış-veriş Listesi - {{liste.length}}</h3>
+            <h3>Alış-veriş Listesi - {{liste.length}} adet</h3>
             <ul>
                 <li v-for="i in liste">
                     <input type="checkbox" v-bind:checked="i.completed" v-on:click="alList(i)"> {{i.name}}
@@ -29,7 +29,7 @@
         </div>
 
         <div v-if="alinanlarListesi.length >0">
-            <h3>Alınanlar</h3>
+            <h3>Alınanlar - {{alinanlarListesi.length}} adet</h3>
             <ul>
                 <li v-for="i in alinanlarListesi">{{i.name}}</li>
             </ul>
