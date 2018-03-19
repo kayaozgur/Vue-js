@@ -19,10 +19,21 @@
             <input type="submit" value="ekle" v-on:click="listeyeEkle" v-bind:disabled="yeni.length == 0 ? true :false">
         </form>
 
-        <h3>Alış-veriş Listesi - {{liste.length}}</h3>
-        <ul>
-            <li v-for="i in liste">{{i}}</li>
-        </ul>
+        <div v-if= "liste.length > 0">
+            <h3>Alış-veriş Listesi - {{liste.length}}</h3>
+            <ul>
+                <li v-for="i in liste">
+                    <input type="checkbox" v-bind:checked="i.completed" v-on:click="alList(i)"> {{i.name}}
+                </li>
+            </ul>
+        </div>
+
+        <div v-if="alinanlarListesi.length >0">
+            <h3>Alınanlar</h3>
+            <ul>
+                <li v-for="i in alinanlarListesi">{{i.name}}</li>
+            </ul>
+        </div>
 
     </div>
 
@@ -37,9 +48,24 @@
             methods: {
                 listeyeEkle(e) {
                     e.preventDefault();
-                    this.liste.push(this.yeni);
+                    this.liste.push({
+                        name: this.yeni,
+                        completed: false
+
+                    });
                     this.yeni = "";
                 },
+
+                alList(i) {
+                    i.completed = !i.completed;
+                }
+            },
+
+            computed: { alinanlarListesi () {
+                return this.liste.filter( i => {
+                    return i.completed;
+                })
+            }
             }
         })
 
