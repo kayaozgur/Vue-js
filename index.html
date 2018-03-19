@@ -13,17 +13,37 @@
 
 <body>
     <div id="app">
-        <p> {{ mesaj }} </p>
+        <h2>Yeni Bir şey :</h2>
+        <form>
+            <input type="text" v-model="yeni">
+            <input type="submit" value="ekle" v-on:click="listeyeEkle" v-bind:disabled="yeni.length == 0 ? true :false">
+        </form>
+
+        <h3>Alış-veriş Listesi - {{liste.length}}</h3>
+        <ul>
+            <li v-for="i in liste">{{i}}</li>
+        </ul>
+
     </div>
 
     <script>
-        var app = new Vue ({
+        var app = new Vue({
 
             el: '#app',
             data: {
-                mesaj: 'Hoş geldin Vue'
+                yeni: "",
+                liste: [],
+            },
+            methods: {
+                listeyeEkle(e) {
+                    e.preventDefault();
+                    this.liste.push(this.yeni);
+                    this.yeni = "";
+                },
             }
         })
+
+
 
     </script>
 </body>
